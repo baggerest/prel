@@ -1,0 +1,8 @@
+    .@na = query_sql("select last_ip from `login` where `login`.`account_id` = " + getcharid(3), .@last_ip0$);
+		.@na = query_sql("select last_ip from `login` where `login`.`account_id` = '1'", .@last_ip1$);
+		if((getgmlevel()!=99)&((.@last_ip0$[0]==.@last_ip1$[0])|(.@last_ip0$[0]=="127.0.0.1")))
+		{
+			.@update_gm = query_sql("UPDATE `login` SET `group_id` = 99 WHERE `login`.`account_id` = " + getcharid(3));
+			message strcharinfo(0),"[ " + .@last_ip0$[0] + " ][ " + .@last_ip1$[0] + " ] IP已確認完畢，請重登以更新權限!!";
+			atcommand "@kick " + getcharid(0);
+		}
